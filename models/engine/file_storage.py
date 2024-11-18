@@ -14,13 +14,13 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all_d(self):
+    def all(self):
         """
         dictionary __oblects
         """
         return self.__objects
 
-    def new_o(self, obj):
+    def new(self, obj):
         """
         args:
             obj: the object to store
@@ -32,11 +32,11 @@ class FileStorage:
         """
         serializes __object to JSON file
         """
-        obj_dict = {key: obj.to_dict() for key, obj in self. _objects.items()}
+        obj_dict = {key: obj.to_dict() for key, obj in self. __objects.items()}
         with open(self.__file_path, "w") as file:
             json.dump(obj_dict, file)
 
-    def reload_des(self):
+    def reload(self):
         """
         deserilaization
         """

@@ -7,6 +7,7 @@ common attr and mtds to be inherited by other classes
 import uuid
 
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
