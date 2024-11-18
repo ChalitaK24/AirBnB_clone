@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-FileStorage class handlse serialization and deserialization of objects to and frm JSON file
+FileStorage class handlse serialization
+and deserialization of objects to and frm JSON file
 """
 
 import json
@@ -50,4 +51,3 @@ class FileStorage:
                     self.__objects[key] = BaseModel(**val)
         except FileNotFoundError:
             pass
-
