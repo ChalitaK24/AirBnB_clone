@@ -26,7 +26,7 @@ class FileStorage:
             obj: the object to store
         """
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self._objects[key] = obj
+        self.__objects[key] = obj
 
     def reload_des(self):
         """
@@ -38,6 +38,8 @@ class FileStorage:
             from models.base_model import BaseModel
             for key, val in obj_dict.items():
                 class_name = val["__class__"]
+                if class_name == "BaseModel":
+                    self.__objects[key] = BaseModel(**val)
         except FileNotFoundError:
             pass
 
