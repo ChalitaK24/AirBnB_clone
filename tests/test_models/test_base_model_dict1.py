@@ -12,6 +12,7 @@ class TestBaseModel(unittest.TestCase):
         """
         setup testcase environment
         """
+        self.model = BaseModel()
 
     def test_instance_frm_kwargs(self):
         """
