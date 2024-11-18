@@ -1,14 +1,49 @@
-#!/usr/bin/python3
+import unittest
 from models.base_model import BaseModel
+from datetime import datetime
+import uuid
 
-my_model = BaseModel()
-my_model.name = "My First Model"
-my_model.my_number = 89
-print(my_model)
-my_model.save()
-print(my_model)
-my_model_json = my_model.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+
+class TestBaseModel(unittest.TestCase):
+    """
+    test for BaseModel class
+    """
+
+    def setUp(self):
+        """
+        Setup test case environment
+        """
+        self.model = BaseModel()
+
+    def test_instance_creation(self):
+        """
+        Test if instance is created
+        """
+
+    def test_id_is_string(self):
+        """
+        Test if id is a string
+        """
+
+    def test_created_at_is_datetime(self):
+        """
+        Test if created_at is a datetime object
+        """
+        self.assertIsInstance(self.model.created_at, datetime)
+
+    def test_updated_at_is_datetime(self):
+        """
+        Test if updated_at is a datetime object
+        """
+        self.assertIsInstance(self.model.updated_at, datetime)
+
+    def test_str_representation(self):
+        """
+        Test the __str__ method
+        """
+        expected = f"[BaseModel] ({self.model.id}) {self.model.__dict__}"
+        self.assertEqual(str(self.model), expected)
+
+
+if __name__ == "__main__":
+    unittest.main()
