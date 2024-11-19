@@ -25,12 +25,24 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
+        if not arg:
+            print("** class name missing **")
+            return
+        if arg not on self.classes:
+            print("** class doesn't exist **")
+            return
+        
         obj = self.classes[arg]()
         obj.save()
         print(obj.id)
 
     def do_show(self, arg):
         args = arg.split()
+
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+
 
         key = f"{args[0]}.{args[1]}"
         obj = storage.all().get(key)
