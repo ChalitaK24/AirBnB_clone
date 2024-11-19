@@ -22,6 +22,8 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
+    def help_do(self, arg):
+        return super().help_do(arg)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
