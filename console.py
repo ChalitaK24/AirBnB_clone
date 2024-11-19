@@ -39,6 +39,13 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(obj)
 
+    def do_destroy(self, arg):
+        args = arg.split()
+
+
+    def do_all(self, arg):
+        args = arg.split(maxsplit=3)
+
     def help_quit(self):
 
         print("Quit command to exit program")
