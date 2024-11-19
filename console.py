@@ -2,7 +2,8 @@
 """ command interpreter entry point"""
 
 import cmd
-
+from models.base_model import BaseModel
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -10,6 +11,7 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
+    classes = {"BaseModel": BaseModel}
 
     def do_quit(self, arg):
         return True
@@ -21,6 +23,21 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         pass
+
+    def do_create(self, arg):
+        obj = self.classes[arg]()
+        obj.save()
+        print(obj.id)
+
+    def do_show(self, arg):
+        args = arg.split()
+
+        key = f"{args[0]}.{args[1]}"
+        obj = storage.all().get(key)
+        if obj is None:
+            print("** no instance found **")
+        else:
+            print(obj)
 
     def help_quit(self):
 
