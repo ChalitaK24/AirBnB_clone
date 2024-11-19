@@ -22,11 +22,13 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    def help_quit(self, arg):
+    def help_quit(self):
+
         print("Quit command to exit program")
 
     def help_EOF(self):
         print("EOF command to exit the program")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
