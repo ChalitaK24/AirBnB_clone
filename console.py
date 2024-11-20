@@ -90,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
             print([str(obj) for obj in storage.all().values() if type(obj).__name__ == args[0]])
 
     def do_update(self, arg):
-        args = arg.split(maxsplit=3)
+        args = arg.split()
         
         if len(args) == 0:
             print("** class name missing **")
@@ -103,9 +103,8 @@ class HBNBCommand(cmd.Cmd):
             return
 
         key = f"{args[0]}.{args[1]}"
-        obj = storage.all().get(key)
         
-        if obj is None:
+        if key not in storage.all():
             print("** no instance found **")
             return
         if len(args) == 2:
@@ -115,6 +114,7 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
 
+        obj = storage.all()[key]
         attr_name = args[2]
         attr_value = args[3].strip('"')
 
@@ -139,5 +139,3 @@ class HBNBCommand(cmd.Cmd):
         print("EOF command to exit the program")
 
 
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
