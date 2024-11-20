@@ -99,7 +99,16 @@ class HBNBCommand(cmd.Cmd):
 
         key = f"{args[0]}.{args[1]}"
         obj = storage.all().get(key)
-
+        
+        if obj = storage.all().get(key)
+            print("** no instance found **")
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+        if len(args) == 3:
+            print("** value missing **")
+            return
 
         attr_name = args[2]
         attr_value = args[3].strip('"')
