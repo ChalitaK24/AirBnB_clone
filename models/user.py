@@ -8,9 +8,8 @@ class User(BaseModel):
     """
     User inherits from BaseModel
     """
-    
+
     email = ""
-    password =""
+    password = ""
     first_name = ""
     last_name = ""
-
