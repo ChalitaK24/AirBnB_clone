@@ -92,13 +92,13 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         args = arg.split()
         
-        if len(args) < 1:
+        if len(args) == 0:
             print("** class name missing **")
             return
         if args[0] not in self.classes:
             print("** class doesn't exist **")
             return
-        if len(arg) > 2:
+        if len(arg) == 1:
             print("** instance id missing **")
             return
 
@@ -107,10 +107,10 @@ class HBNBCommand(cmd.Cmd):
         if key not in storage.all():
             print("** no instance found **")
             return
-        if len(args) < 3:
+        if len(args) == 2:
             print("** attribute name missing **")
             return
-        if len(args) < 4:
+        if len(args) == 3:
             print("** value missing **")
             return
 
