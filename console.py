@@ -118,15 +118,10 @@ class HBNBCommand(cmd.Cmd):
         attr_name = args[2]
         attr_value = args[3].strip('"')
 
-        try:
-            if attr_value.isdigit():
-                attr_value = int(attr_value)
-            elif '.' in attr_value:
-                attr_value = float(attr_value)
-
-        except ValueError:
-            pass
-
+        if hasattr(obj, attr_name):
+            attr_type = type(getattr(obj, attr_name))
+            attr_value = attr_type(attr_value)
+ 
         setattr(obj, attr_name, attr_value)
         obj.save()
 
