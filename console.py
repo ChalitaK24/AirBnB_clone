@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        if arg not on self.classes:
+        if arg not in self.classes:
             print("** class doesn't exist **")
             return
         
@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg):
         args = arg.split()
 
-        if len (args) == 9:
+        if len (args) == 0:
             print("** class name missing **")
             return
         if args[0] not in self.classes:
@@ -85,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
         objs = storage.all()
 
     def do_update(self, arg):
-        args = arg,splt(maxsplit=3)
+        args = arg.split(maxsplit=3)
         
         if len(args) == 0:
             print("** class name missing **")
@@ -100,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
         key = f"{args[0]}.{args[1]}"
         obj = storage.all().get(key)
         
-        if obj = storage.all().get(key)
+        if obj is None:
             print("** no instance found **")
             return
         if len(args) == 2:
@@ -113,17 +113,17 @@ class HBNBCommand(cmd.Cmd):
         attr_name = args[2]
         attr_value = args[3].strip('"')
 
-    try:
-        if attr_value.isdigit():
-            attr_value = int(attr_value)
-        elif '.' in attr_value:
-            attr_value = float(attr_value)
+        try:
+            if attr_value.isdigit():
+                attr_value = int(attr_value)
+            elif '.' in attr_value:
+                attr_value = float(attr_value)
 
-    except ValueError:
-        pass
+        except ValueError:
+            pass
 
-    setattr(obj, attr_name, attr_value)
-    obj.save()
+        setattr(obj, attr_name, attr_value)
+        obj.save()
 
 
     def help_quit(self):
