@@ -78,14 +78,15 @@ if result is None or result == "":
     
 model_id = result
 
-result = exec_command(my_console, "destroy BaseModel")
+result = exec_command(my_console, "all Fake")
 if result is None or result == "":
     print("FAIL: no output")
     
-search_str = "** instance id missing **"
+search_str = "** class doesn't exist **"
 if result != search_str:
     print("FAIL: wrong message: \"{}\" instead of \"{}\"".format(result, search_str))
     
 print("OK", end="")
 
 shutil.copy("tmp_console_main.py", "console.py")
+
