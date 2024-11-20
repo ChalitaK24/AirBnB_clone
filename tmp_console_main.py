@@ -94,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         if len(arg) == 1:
-            print("** instance id missing **")
+            print("** instance is missing **")
             return
 
         key = f"{args[0]}.{args[1]}"
