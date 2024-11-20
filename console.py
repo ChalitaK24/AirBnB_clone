@@ -45,10 +45,10 @@ class HBNBCommand(cmd.Cmd):
             return
 
         if args[0] not in self.classes:
-            print("** class does't exist **")
+            print("** class doesn't exist **")
             return
         if len(args) == 1:
-            print("** instance is missing **")
+            print("** instance id missing **")
             return
 
         key = f"{args[0]}.{args[1]}"
