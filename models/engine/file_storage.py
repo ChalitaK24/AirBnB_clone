@@ -5,7 +5,7 @@ and deserialization of objects to and frm JSON file
 """
 
 import json
-
+from models.user import User
 
 class FileStorage:
     """
