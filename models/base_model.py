@@ -5,7 +5,6 @@ common attr and mtds to be inherited by other classes
 """
 
 import uuid
-from uuid import uuid4
 from datetime import datetime
 from models import storage
 
@@ -29,7 +28,7 @@ class BaseModel:
                     setattr(self, key, val)
 
         else:
-            self.id = str(uuid4())
+            self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             storage.new(self)

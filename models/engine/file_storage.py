@@ -5,7 +5,7 @@ and deserialization of objects to and frm JSON file
 """
 
 import json
-from models.user import User
+
 
 class FileStorage:
     """
@@ -45,9 +45,11 @@ class FileStorage:
             with open(self.__file_path, "r") as file:
                 obj_dict = json.load(file)
             from models.base_model import BaseModel
+ 
             for key, val in obj_dict.items():
                 class_name = val["__class__"]
                 if class_name == "BaseModel":
                     self.__objects[key] = BaseModel(**val)
+
         except FileNotFoundError:
             pass
