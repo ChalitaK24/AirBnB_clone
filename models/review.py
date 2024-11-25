@@ -8,4 +8,6 @@ class Review(BaseModel):
     """
     Review rep
     """
-
+    place_id = ""
+    user_id = ""
+    text = ""
