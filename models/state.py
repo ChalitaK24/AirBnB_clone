@@ -7,4 +7,4 @@ class State(BaseModel):
     """
     State representation
     """
-     name = ""
+    name = ""
