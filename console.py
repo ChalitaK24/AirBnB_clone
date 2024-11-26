@@ -28,7 +28,6 @@ class HBNBCommand(cmd.Cmd):
         "Review": Review,
     }
 
- 
     def do_quit(self, arg):
         return True
 
@@ -40,22 +39,22 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-         if not arg:
-             print("** class name missing **")
-             return
-         if arg not in self.class_dict:
-             print("** class doesn't exist **")
-             return
-         new_instance = self.class_dict[arg]()
-         new_instance.save()
-         print(new_instance.id)
+        if not arg:
+            print("** class name missing **")
+            return
+        if arg not in self.class_dict:
+            print("** class doesn't exist **")
+            return
+        new_instance = self.class_dict[arg]()
+        new_instance.save()
+        print(new_instance.id)
 
     def do_show(self, arg):
         args = arg.split()
         if not args:
             print("** class name missing **")
             return
-            
+
         if args[0] not in self.class_dict:
             print("** class doesn't exist **")
             return
@@ -130,10 +129,10 @@ class HBNBCommand(cmd.Cmd):
         try:
             attr_value = eval(attr_value)
         except (ValueError, SyntaxError):
-             pass
+            pass
         setattr(instance, attr_name, attr_value)
         instance.save()
 
 
 if __name__ == '__main__':
-     HBNBCommand().cmdloop()
+    HBNBCommand().cmdloop()

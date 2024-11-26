@@ -61,7 +61,7 @@ class FileStorage:
         try:
             with open(self.__file_path, "r") as file:
                 obj_dict = json.load(file)
- 
+
             for key, val in obj_dict.items():
                 class_name = val.get("__class__")
                 if class_name in self.__class_dict:
