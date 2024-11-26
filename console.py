@@ -2,9 +2,9 @@
 """ command interpreter entry point"""
 
 import cmd
+from models import storage
 from models.base_model import BaseModel
 from models.user import User
-from models import storage
 from models.place import Place
 from models.state import State
 from models.city import City
@@ -12,26 +12,23 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-valid_classes = {"BaseModel": BaseModel, "User": User}
-
-
 class HBNBCommand(cmd.Cmd):
     """
     cmd interpreter for HBNB
     """
-
-    class_dict = {
-            "BaseModel": BaseModel,
-            "User": User,
-            "Place": Place,
-            "State": State,
-            "City": City,
-            "Amenity": Amenity,
-            "Review": Review,
-        }
-
     prompt = "(hbnb) "
 
+    class_dict = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review,
+    }
+
+ 
     def do_quit(self, arg):
         return True
 
@@ -46,10 +43,10 @@ class HBNBCommand(cmd.Cmd):
          if not arg:
              print("** class name missing **")
              return
-         if arg not in valid_classes:
+         if arg not in self.class_dict:
              print("** class doesn't exist **")
              return
-         new_instance = valid_classes[arg]()
+         new_instance = self.class_dict[arg]()
          new_instance.save()
          print(new_instance.id)
 
@@ -59,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
             
-        if args[0] not in valid_classes:
+        if args[0] not in self.class_dict:
             print("** class doesn't exist **")
             return
 
@@ -78,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        if args[0] not in valid_classes:
+        if args[0] not in self.class_dict:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -93,15 +90,15 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_all(self, arg):
-        if arg and arg not in valid_classes:
+        if arg and arg not in self.class_dict:
             print("** class doesn't exist **")
             return
 
         objects = storage.all()
-        result = []
-        for key, obj in objects.items():
-            if not arg or key.startswith(arg + "."):
-                result.append(str(obj))
+        result = [
+            str(obj) for key, obj in objects.items()
+            if not arg or key.startswith(arg + ".")
+        ]
         print(result)
 
     def do_update(self, arg):
@@ -110,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        if args[0] not in valid_classes:
+        if args[0] not in self.class_dict:
             print("** class doesn't exist **")
             return
 
@@ -131,11 +128,8 @@ class HBNBCommand(cmd.Cmd):
         attr_name = args[2]
         attr_value = args[3].strip('"')
         try:
-             if '.' in attr_value:
-                 attr_value = float(attr_value)
-             else:
-                 attr_value = int(attr_value)
-        except ValueError:
+            attr_value = eval(attr_value)
+        except (ValueError, SyntaxError):
              pass
         setattr(instance, attr_name, attr_value)
         instance.save()

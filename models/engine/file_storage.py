@@ -23,13 +23,13 @@ class FileStorage:
     __objects = {}
 
     __class_dict = {
-            "BaseModel": BaseModel,
-            "User": User,
-            "Place": Place,
-            "State": State,
-            "City": City,
-            "Amenity": Amenity,
-            "Review": Review,
+        "BaseModel": BaseModel,
+        "User": User,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review,
     }
 
     def all(self):
@@ -63,8 +63,8 @@ class FileStorage:
                 obj_dict = json.load(file)
  
             for key, val in obj_dict.items():
-                class_name = val["__class__"]
-                self.__objects[key] = self.__class_dict[class_name](**val)
-
+                class_name = val.get("__class__")
+                if class_name in self.__class_dict:
+                    self.__objects[key] = self.__class_dict[class_name](**val)
         except FileNotFoundError:
             pass
