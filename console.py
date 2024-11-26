@@ -127,16 +127,10 @@ class HBNBCommand(cmd.Cmd):
         attr_name = args[2]
         attr_value = args[3].strip('"')
 
-        if attr_value.startswith('"') and attr_value.endswith('"'):
-            attr_value = attr_value[1:-1]
-
         try:
-        if '.' in attr_value:
-            attr_value = float(attr_value)
-        else:
-            attr_value = int(attr_value)
+            attr_value = eval(attr_value)
 
-        except ValueError:
+        except (ValueError, SyntaxError):
             pass
         setattr(instance, attr_name, attr_value)
         instance.save()
